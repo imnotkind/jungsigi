@@ -23,7 +23,7 @@ class KmeansPlusPlus(Kmeans):
                 self.current_centroid.append(choice[1:])
             else:
                 for p in range(len(self.points)):
-                    self.weights[p] = self.calculate_distance(choice, self.points[p]) / 2
+                    self.weights[p] = self.calculate_distance(choice, self.points[p]) ** 2
                 choice = random.choices(self.points, weights=self.weights, k=1)[0][1:]
                 self.current_centroid.append(choice)
         
