@@ -18,7 +18,7 @@ class KmeansPlusPlus(Kmeans): # inherit Kmeans
                 self.current_centroid.append((choice[1], choice[2]))
             else:
                 for p in range(len(self.points)):
-                    self.weights[p] = self.calculate_distance(self.current_centroid[-1], self.points[p]) ** 2 # calculate distance with latest chosen center
+                    self.weights[p] = self.calculate_distance(self.current_centroid[-1], self.points[p][1:]) ** 2 # calculate distance with latest chosen center
                 choice = random.choices(self.points, weights=self.weights, k=1)[0] # give weights to random.choices to choose from a weighted probability distribution
                 self.current_centroid.append((choice[1], choice[2]))
 

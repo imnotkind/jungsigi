@@ -40,7 +40,9 @@ tolerance값은 현재 centroid와 이전 centroid의 distance를 이전 centroi
 
 ## Discussion
 
-k-means의 랜덤성 때문에 clustering 결과가 계속 바뀌어 내가 알맞게 구현했는지 알 수 없어 조금 불안하다.  하지만 한 경우의 centroid 값들이 예시와 같아서 아마 맞게 한 것 같다.
+k-means의 랜덤성 때문에 clustering 결과가 계속 바뀌어 내가 알맞게 구현했는지 알 수 없어 조금 불안하다.  하지만 centroid 값들이 예시와 같은 경우가 있어 아마 맞게 한 것 같다.
+
+index가 꼭 data.txt의 순서와 일치한다는 말이 없다는 걸 깨닫고 일단은 index값도 assigned_cluster의 정보에다 넣게 바꿨다. data.txt에서 몇번째 줄인지와 상관없이 data.txt에 쓰여진 index값을 기준으로 data point들이 어느 cluster로 갔는지 알 수 있고, result.txt에도 data.txt에 쓰여진 index값을 기준으로 적힌다.
 
 
 
