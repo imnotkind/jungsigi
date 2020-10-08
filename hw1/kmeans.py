@@ -1,7 +1,6 @@
 import random
 import math
 import time
-import matplotlib.pyplot as plt
 
 class Kmeans:
     def __init__(self, points, number_of_cluster=5, tolerance=0.001):

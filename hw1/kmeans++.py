@@ -3,7 +3,7 @@ import math
 import time
 from kmeans import Kmeans
 
-class KmeansPlusPlus(Kmeans):
+class KmeansPlusPlus(Kmeans): # inherit Kmeans
     def __init__(self, points, number_of_cluster=5, tolerance=0.001):
         super().__init__(points, number_of_cluster, tolerance)
         self.weights = [-1 for _ in points] #for kmeans++ initialization step
