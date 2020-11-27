@@ -14,7 +14,7 @@ Our objective is to make a SIR, SIRS, SIR with vaccine model and plot it, and ob
 
 In the SIR model, every node (human) has 3 states : susceptible(S), infectious(I), and recovered(R). 
 
-The probability that susceptible could change to infectious is beta. Note that this is an independent event on every infectious neighbor on that node. So the total probability is 1 - p(getting uninfected by all infectious neighbors) = 1 - (1-beta)^(number of infectious neighbors)
+The probability that susceptible could change to infectious is beta. The infection probability of one susceptible node is calculated by the fraction of infected neighbors * beta.
 
 The probability that infectious could change to recovered is gamma.
 
@@ -40,25 +40,27 @@ We test it with various networks, like complete graphs, or erdos renyi graphs, o
 
 The first graph is the SIR model with Complete(Fully connected) graph.
 
-![image-20201125224924462](C:\Users\haebin\AppData\Roaming\Typora\typora-user-images\image-20201125224924462.png)
+![image-20201127144343236](C:\Users\haebin\AppData\Roaming\Typora\typora-user-images\image-20201127144343236.png)
 
-Note that initially, The number of Infectious population rapidly increases. Then it decreases, which means people are turning into recovered status gradually. Eventually, everyone gets recovered.
+Note that initially, The number of Infectious population increases. Then it decreases, which means people are turning into recovered status gradually. Eventually, everyone gets recovered. S draws a decreasing line, I draws a hill, R draws an increasing line.
 
 ### SIR : Erdos Renyi Graph
 
-![image-20201125225335190](C:\Users\haebin\AppData\Roaming\Typora\typora-user-images\image-20201125225335190.png)
+![image-20201127144439096](C:\Users\haebin\AppData\Roaming\Typora\typora-user-images\image-20201127144439096.png)
 
-Comparing to the Complete graph, the Erdos Renyi graph has fewer connections. So you can see it takes more time to infect people, and the peak of infectious people are lower than the complete graph. This is because connections are related to possibility in infection. The timing of everyone recovering is also slow, because infection is slow. 
+Comparing to the Complete graph, the Erdos Renyi graph has fewer connections. So you can see it takes more time to infect people, and to recover. This is because connections are related to possibility in infection. The timing of everyone recovering is also slow, because infection is slow. 
 
 ### SIR : Barabasi Albert Graph
 
-![image-20201125225616231](C:\Users\haebin\AppData\Roaming\Typora\typora-user-images\image-20201125225616231.png)
+![image-20201127144454872](C:\Users\haebin\AppData\Roaming\Typora\typora-user-images\image-20201127144454872.png)
 
-The Barabasi Albert Graph is even more sparse than the Erdos Renyi graph. It takes more time to infect people, and it takes more time for everyone to get recovered. Basically, the connection of networks decide how the SIR result looks like, because that's the only factor that decides the probability of infection when every other parameters, like beta, gamma, initial_inf are the same, like in this case.
+The configuration of the Barabasi Albert graph has approximately the same edges as Erdos Renyi graph. We can check that Erdos Renyi has 50059 edges, Barabasi Albert has 50191 edges. So the status of the connection determines the difference. Barabasi Albert tends to have "hubs", which means super nodes that have a lot of connectivity. Barabasi Albert has more concentrated influencers, whereas Erdos Renyi has  about the same amount of connections in every node. The results shows that Barabasi's case is a bit more faster in infection, and slower in full recovery than Erdos Renyi, although it's quite similar since the number of edges are similar. 
+
+
 
 ### SIRS : Barabasi Albert Graph
 
-![image-20201125230746434](C:\Users\haebin\AppData\Roaming\Typora\typora-user-images\image-20201125230746434.png)
+![image-20201127144506474](C:\Users\haebin\AppData\Roaming\Typora\typora-user-images\image-20201127144506474.png)
 
 Now we have a probability of zeta : having a change from recovered to susceptible. This model definitely has more noise than SIR.  I think this is because this model is more unstable than SIR, since people's status are keep changing even after convergence, and SIR just maintained everyone fully recovered and no one's status changing after convergence. I could have smoothed it more by doing more runs, but I thought maintaining the other conditions the same with other models is important to observe and compare. The interesting thing is, no more full recovery. It seems like R, I, S are having an equibrillium not at a value of 0 or 1, unlike SIR models. 
 
@@ -66,9 +68,9 @@ Now we have a probability of zeta : having a change from recovered to susceptibl
 
 ### SIR with vaccine : Barabasi Albert Graph
 
-![image-20201125231139849](C:\Users\haebin\AppData\Roaming\Typora\typora-user-images\image-20201125231139849.png)
+![image-20201127155309991](C:\Users\haebin\AppData\Roaming\Typora\typora-user-images\image-20201127155309991.png)
 
-With vaccines, the speed of recovery gets faster, since we have a shorcut to susceptible -> recovered. But like our current status of the world, we have too less amounts of vaccines, only 1 per t in this example. So the change is barely noticable. 
+With vaccines, we can clearly notice the maximum infected population decreased than just SIR model. Also, the increase of recovered population is faster. The choice of target was the susceptible one who had the most possibility to get infected, which is the one who has the max score of infected neighbors / neighbors. 
 
 # Time spent on assignment
 
